@@ -28,14 +28,14 @@ public class CheckConnection extends HttpServlet {
 			if(con!=null)
 				result = "Connected !";
 		} catch (ClassNotFoundException | SQLException e) {
-				result = "Connection Error";
+				result = "Connection Error " + e.getMessage();
 				e.printStackTrace();
 		} finally {
 			if(con!=null)
 				try {
 					con.close();
 				} catch (SQLException e) {
-					e.printStackTrace();
+					result = "Error while clossing Connection " + e.getMessage();
 				}
 		}
 		response.getWriter().write(result);
